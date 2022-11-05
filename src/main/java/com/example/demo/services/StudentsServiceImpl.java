@@ -10,9 +10,10 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class StudentsServiceImpl implements StudentService{
+public class StudentsServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
+
     @Override
     public List<Student> listAll() {
         List<Student> students = new ArrayList<>();
@@ -22,21 +23,23 @@ public class StudentsServiceImpl implements StudentService{
 
     @Override
     public Student getById(Long id) {
-        return null;
+        return studentRepository.findById(id).orElse(null);
     }
 
     @Override
     public Student update(Long id, Student student) {
-        return null;
+        studentRepository.save(student);
+        return student;
     }
 
     @Override
     public Student saveStudent(Student student) {
-        return null;
+        studentRepository.save(student);
+        return student;
     }
 
     @Override
     public void delete(Long id) {
-
+        studentRepository.deleteById(id);
     }
 }
