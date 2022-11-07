@@ -12,7 +12,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+public class Prof {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,11 +20,12 @@ public class Student {
     private Long id;
     private String firstName;
     private String lastName;
+    private String course;
     private int age;
-    private String email;
-    private String password;
 
-    @ManyToMany
-    private Set<Prof> prof = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "prof_students", joinColumns ={@JoinColumn(name = "prof_id",referencedColumnName="id" )}, inverseJoinColumns ={@JoinColumn(name = "student_id", referencedColumnName="id")})
+    private Set<Student> students = new HashSet<>();
+
 
 }
