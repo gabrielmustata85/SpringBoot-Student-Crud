@@ -2,11 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.model.Student;
 import com.example.demo.services.StudentService;
-import com.example.demo.services.StudentsServiceImpl;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +16,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RequestMapping(path = "/student")
 public class StudentController {
 
+    private final String SUCCESS_MESSAGE = "Student created successfully";
     private final StudentService studentService;
 
     @GetMapping(path = {"", "/"})
@@ -34,10 +31,20 @@ public class StudentController {
         return ResponseEntity.ok().body(student);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
-        studentService.saveStudent(student);
-        return new ResponseEntity<>(student, CREATED);
+    @PostMapping("/addStudentWithParam")
+    public ResponseEntity<String> addStudentParam(@RequestParam("firstName") String firstName,
+                                                  @RequestParam("lastName") String lastName,
+                                                  @RequestParam("username") String username,
+                                                  @RequestParam("email") String email,
+                                                  @RequestParam("password") String password) {
+        studentService.saveStudentParam(firstName, lastName, username, email, password);
+        return new ResponseEntity<>(SUCCESS_MESSAGE, CREATED);
+    }
+
+    @PostMapping("/addStudentWithBody")
+    public ResponseEntity<String> addStudentBody(@RequestBody Student student) {
+       studentService.saveStudentNewBody(student);
+        return new ResponseEntity<>(SUCCESS_MESSAGE, CREATED);
     }
 
     @PutMapping("/edit/{id}")

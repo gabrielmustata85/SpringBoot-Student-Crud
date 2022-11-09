@@ -23,6 +23,7 @@ public class Student {
     private int age;
     private String email;
     private String password;
+    private String username;
 
     @ManyToMany
     private Set<Prof> prof = new HashSet<>();

@@ -1,7 +1,6 @@
 package com.example.demo.services;
 
 import com.example.demo.model.Student;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -16,4 +15,8 @@ public interface StudentService {
     Student saveStudent(Student student);
 
     void delete(Long id);
+
+    Student saveStudentParam(String firstName, String lastName, String username, String email, String password);
+
+    void saveStudentNewBody(Student student);
 }
