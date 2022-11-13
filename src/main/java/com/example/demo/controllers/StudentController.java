@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -49,8 +50,9 @@ public class StudentController {
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<Student> editStudent(@RequestBody Student student, @PathVariable ("id") Long id) {
-        studentService.update(id, student);
-        return new ResponseEntity<>(student, CREATED);
+        student.setId(id);
+        studentService.update(student);
+        return new ResponseEntity<>(student, OK);
     }
 
     @DeleteMapping("delete/{id}")
