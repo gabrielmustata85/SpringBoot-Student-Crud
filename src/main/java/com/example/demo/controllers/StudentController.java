@@ -27,7 +27,7 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Long id ){
+    public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
         Student student = studentService.getById(id);
         return ResponseEntity.ok().body(student);
     }
@@ -44,19 +44,19 @@ public class StudentController {
 
     @PostMapping("/addStudentWithBody")
     public ResponseEntity<String> addStudentBody(@RequestBody Student student) {
-       studentService.saveStudentNewBody(student);
+        studentService.saveStudentNewBody(student);
         return new ResponseEntity<>(SUCCESS_MESSAGE, CREATED);
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Student> editStudent(@RequestBody Student student, @PathVariable ("id") Long id) {
+    public ResponseEntity<Student> editStudent(@RequestBody Student student, @PathVariable("id") Long id) {
         student.setId(id);
         studentService.update(student);
         return new ResponseEntity<>(student, OK);
     }
 
     @DeleteMapping("delete/{id}")
-    public void deleteStudent(@PathVariable Long id){
+    public void deleteStudent(@PathVariable Long id) {
         studentService.delete(id);
     }
 }
