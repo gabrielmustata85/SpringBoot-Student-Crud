@@ -10,7 +10,7 @@ public interface StudentService {
 
     Student getById(Long id);
 
-    Student update(Long id, Student student);
+    Student update(Student student);
 
     Student saveStudent(Student student);
 

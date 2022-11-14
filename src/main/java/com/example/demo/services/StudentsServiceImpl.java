@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -29,7 +30,7 @@ public class StudentsServiceImpl implements StudentService {
     }
 
     @Override
-    public Student update(Long id, Student student) {
+    public Student update(Student student) {
         studentRepository.save(student);
         return student;
     }
